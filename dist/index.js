@@ -14,30 +14,27 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'd
 
 var _reactNative = require('react-native');
 
+var _reactNative2 = _interopRequireDefault(_reactNative);
+
 // Using bare setTimeout, setInterval, setImmediate
 // and requestAnimationFrame calls is very dangerous
 // because if you forget to cancel the request before
 // the component is unmounted, you risk the callback
 // throwing an exception.
 
-var _reactNative2 = _interopRequireDefault(_reactNative);
-
 var _reactTimerMixin = require('react-timer-mixin');
 
 var _reactTimerMixin2 = _interopRequireDefault(_reactTimerMixin);
 
-var _Dimensions = require('Dimensions');
+var _Dimensions$get = _reactNative.Dimensions.get('window');
 
-var _Dimensions2 = _interopRequireDefault(_Dimensions);
-
-var _Dimensions$get = _Dimensions2['default'].get('window');
+var width = _Dimensions$get.width;
+var height = _Dimensions$get.height;
 
 /**
  * Default styles
  * @type {StyleSheetPropType}
  */
-var width = _Dimensions$get.width;
-var height = _Dimensions$get.height;
 var styles = _reactNative.StyleSheet.create({
   container: {
     backgroundColor: 'transparent',
@@ -341,7 +338,7 @@ exports['default'] = _reactNative2['default'].createClass({
 
     var dots = [];
     for (var i = 0; i < this.state.total; i++) {
-      dots.push(i === this.state.index ? this.props.activeDot || _reactNative2['default'].createElement(_reactNative.View, { style: {
+      dots.push(i === this.state.index ? this.props.activeDot || _reactNative2['default'].createElement(_reactNative.View, { key: i, style: {
           backgroundColor: '#007aff',
           width: 8,
           height: 8,
@@ -350,7 +347,7 @@ exports['default'] = _reactNative2['default'].createClass({
           marginRight: 3,
           marginTop: 3,
           marginBottom: 3
-        } }) : this.props.dot || _reactNative2['default'].createElement(_reactNative.View, { style: {
+        } }) : this.props.dot || _reactNative2['default'].createElement(_reactNative.View, { key: i, style: {
           backgroundColor: 'rgba(0,0,0,.2)',
           width: 8,
           height: 8,
@@ -519,7 +516,7 @@ exports['default'] = _reactNative2['default'].createClass({
         }] },
       _reactNative2['default'].createElement(
         _reactNative.ScrollView,
-        _extends({ ref: "scrollView"
+        _extends({ ref: 'scrollView'
         }, props, {
           contentContainerStyle: [styles.wrapper, props.style],
           contentOffset: state.offset,
